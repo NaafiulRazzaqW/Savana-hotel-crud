@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Room;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = Room::all();
+        return view('home' , compact('data'));
+    }
+
+    public function tambahdata(){
+        return view('tambahdata');
+    }
+
+    public function insertdata(PostRequest $request){
+        //mengubah nama file
+        $extention = $request->file('uploadImage')->getClientOriginalExtension();
+        $newName = md5($request->file('uploadImage')->getClientOriginalName().Carbon::now()) . '.' . $extention;
+        
+
+        $path = public_path('/image');
+        $request->file('uploadImage')->move($path, $newName);
+
+        $inputanData = [
+            'title'=> $request->title,
+            'description'=> $request->description,
+            'price'=> $request->price,
+            'image'=> $newName,
+        ];
+
+        $data = Room::create($inputanData);
+
+        return redirect()->route('home')->with('success','Data Telah Ditambahkan');
     }
 }

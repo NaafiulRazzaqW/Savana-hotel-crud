@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home1Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class,'index']);
-Route::get('/stay', [HomeController::class, 'bedroomlist']);
-Route::get('/facilities', [HomeController::class,'facilities']);
-Route::get('/contactus', [HomeController::class,'contactus']);
+Route::get('/', [Home1Controller::class, 'index']);
+Route::get('/stay', [Home1Controller::class, 'bedroomlist']);
+Route::get('/facilities', [Home1Controller::class, 'facilities']);
+Route::get('/contactus', [Home1Controller::class, 'contactus']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('user', UserController::class);

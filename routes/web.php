@@ -28,3 +28,6 @@ Route::resource('user', UserController::class);
 
 Route::get('/tambahdata', [HomeController::class,'tambahdata'])->name('tambahdata');
 Route::post('/insertdata', [HomeController::class,'insertdata'])->name('insertdata');
+
+Route::get('/tampildata/{id}', [HomeController::class,'tampildata'])->name('tampildata');
+Route::post('/updatedata/{id}', [HomeController::class,'updatedata'])->name('updatedata');

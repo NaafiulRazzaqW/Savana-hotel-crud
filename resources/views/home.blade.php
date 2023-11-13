@@ -35,7 +35,7 @@
                             <td>${{$row->price}}</td>
                             <td>
                                 <button type='button' class="btn btn-danger">Delete</button>
-                                <button type='button' class="btn btn-info">Edit</button>
+                                <a href='/tampildata/{{$row->id}}' class="btn btn-info">Edit</a>
                             </td>
                           </tr>
                         @endforeach
